@@ -1,0 +1,15 @@
+body,html{
+    padding:0;
+    margin:0;
+}
+body{
+    background:-webkit-linear-gradient(left,rgb(37, 175, 230), rgb(93, 152, 241));
+    color:#ddd;
+}
+ul,ol{
+    list-style: none;
+}
+a{
+    color:#ddd;
+    text-decoration: none;
+}
