@@ -22,19 +22,27 @@ module.exports = {
                         presets: ["es2015", "react", "stage-0"]
                     }
                 }
-            }
+            },
+            {
+                test: /\.css|scss$/,
+                use: ['style-loader','css-loader','sass-loader']
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader','css-loader','less-loader']
+            },
         ]
     },
     resolve: {
         modules: [
             'node_modules',
         ],
-        extensions: ['.js', '.jsx', '.json', '.scss', ".less", '.css'],
+        extensions: ['.js', '.jsx', '.json', '.css', '.scss', ".less", ],
         alias: {
             '@packages': path.resolve(__dirname, '../packages/'),
             '@js': path.resolve(__dirname, '../src/js/'),
-            '@css': path.resolve(__dirname, "../src/assets/css"),
-            '@lib': path.resolve(__dirname, "../src/assets/lib"),
+            '@css': path.resolve(__dirname, "../src/assets/css/"),
+            '@lib': path.resolve(__dirname, "../src/assets/lib/"),
         }
     },
     plugins: [
