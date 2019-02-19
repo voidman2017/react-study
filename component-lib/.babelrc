@@ -2,9 +2,9 @@
     "presets": [
         [
             "es2015",
-            {
-                "modules": false
-            }
+            // {
+            //     "modules": false
+            // }
         ],
         [
             "stage-0"

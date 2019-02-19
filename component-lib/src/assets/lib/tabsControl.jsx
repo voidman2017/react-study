@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import Swiper from 'swiper';
-
+import '@css/tabsControl';
 class TabsControl extends PureComponent {
     constructor(props) {
         super(props);
@@ -9,10 +9,13 @@ class TabsControl extends PureComponent {
     initChildBullet() {
         this.bullet = []
         let { children = [] } = this.props;
-        return children.map((child, index) => {
-            const { label = "", value = index } = child.props;
-            this.bullet.push({ label, value });
-        })
+        if (children instanceof Array) {
+            children.map((child, index) => {
+                const { label = "", value = index } = child.props;
+                this.bullet.push({ label, value });
+            })
+        } 
+        return this.bullet;
     }
     defConf = {
         freeMode: false,
@@ -24,20 +27,26 @@ class TabsControl extends PureComponent {
         bulletActiveClass: "activity",
         paginationCurrentClass: "current",
         paginationClickable: true,
-        paginationBulletRender: (swiper, index, className) => {
-            if (swiper.slides.length > 1) {
-                return `<li class="${className}">${this.bullet[index].label}</li>`;
-            } else {
-                return "";
-            }
+        pagination: {
+            clickable: true,
+            renderBullet: (index, className) => {
+                if (this.bullet.length > 1) {
+                    return `<li class="${className}">${this.bullet[index].label}</li>`;
+                } else {
+                    return "";
+                }
+            },
         },
-        onSlideChangeEnd: (swiper) => {
-            const { historyKey } = this.props;
-            if (historyKey) {   //如果有设置historyKey则保存slide切换状态
-                history.replaceState(this.merge(
-                    this.getHistoryState(),
-                    { [historyKey]: swiper.activeIndex }
-                ), null, location.pathname);
+        on: {
+            slideChangeTransitionEnd: (swiper) => {
+                const { historyKey } = this.props;
+                console.log(this.getHistoryState())
+                if (historyKey && this.swiper) {   //如果有设置historyKey则保存slide切换状态
+                    history.replaceState(this.merge(
+                        this.getHistoryState(),
+                        { [historyKey]: this.swiper.activeIndex }
+                    ), null, location.pathname);
+                }
             }
         }
     }
@@ -49,14 +58,31 @@ class TabsControl extends PureComponent {
             return Object.assign(object, current)
         }, {});
     }
+    deepMerge(obj1, obj2) {
+        var key;
+        for(key in obj2) {
+            // 如果target(也就是obj1[key])存在，且是对象的话再去调用deepMerge，否则就是obj1[key]里面没这个对象，需要与obj2[key]合并
+            obj1[key] = obj1[key] && obj1[key].toString() === "[object Object]" ?
+            this.deepMerge(obj1[key], obj2[key]) : obj1[key] = obj2[key];
+        }
+        return obj1;
+    }
+    deepMergeList(...rest){
+        return rest.reduce((last, current)=>{
+            return this.deepMerge(last, current)
+        })
+    }
     componentDidMount() {
         const { conf, historyKey = "tabs" } = this.props;
         const { [historyKey]: initialSlide = 0 } = this.getHistoryState();    //获取history堆栈中state用以定位到指定slide
-        const swiper = new Swiper(
+        this.swiper = new Swiper(
             this.refs.container,
-            this.merge(this.defConf, {          //合并conf参数
+            this.deepMergeList(this.defConf, {          //合并conf参数
                 initialSlide,
-                pagination: this.refs.tabs,
+                pagination: {
+                    el: this.refs.tabs,
+                    // el:".swiper-pagination"
+                }
             }, conf)
         );
     }
@@ -65,7 +91,7 @@ class TabsControl extends PureComponent {
         return (
             <div className={`${className} list-swiper-subassembly`}>
                 <div className="swiper-tab">
-                    <ul className="clearfix" ref="tabs">
+                    <ul className="clearfix swiper-pagination" ref="tabs">
 
                     </ul>
                 </div>
