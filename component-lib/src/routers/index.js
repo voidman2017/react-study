@@ -14,7 +14,7 @@ class AppLoadRoute extends PureComponent {
             this.setState({
                 loaded: true
             })
-        }, 1000)
+        }, 300)
     }
     render() {
         const { loaded } = this.state;
@@ -37,32 +37,13 @@ const AnsycLoad = (loader) => {
 const RootRoute = () => (
     <Router>
         <Switch>
-            <InterceptRoute exact path="/index"
-                component={AnsycLoad(() => import(
-                    /* webpackChunkName : "views/home" */
-                    "../views/home")
-                )} />
-            <Route exact path="/redux"
-                component={AnsycLoad(() => import(
-                    /* webpackChunkName : "views/redux" */
-                    "../views/redux")
-                )} />
-            <Route exact path="/reduxHigh"
-                component={AnsycLoad(() => import(
-                    /* webpackChunkName : "views/reduxHigh" */
-                    "../views/reduxHigh")
-                )} />
-            <Route exact path="/tab"
-                component={AnsycLoad(() => import(
-                    /* webpackChunkName : "views/tab" */
-                    "../views/tab")
-                )} />
+            <InterceptRoute exact path="/index" component={AnsycLoad(() => import( /* webpackChunkName : "views/home" */ "../views/home"))} />
+            <Route exact path="/redux" component={AnsycLoad(() => import(/* webpackChunkName : "views/redux" */ "../views/redux"))} />
+            <Route exact path="/reduxHigh" component={AnsycLoad(() => import(/* webpackChunkName : "views/reduxHigh" */ "../views/reduxHigh"))} />
+            <Route exact path="/tab" component={AnsycLoad(() => import(/* webpackChunkName : "views/tab" */ "../views/tab"))} />
+            <Route exact path="/form" component={AnsycLoad(() => import(/* webpackChunkName : "views/form" */ "../views/form"))} />
             <Route exact path="/" render={(props) => <Redirect to={{ pathname: "/index", state: { from: props.location } }} />} />
-            <Route exact path="/*"
-                component={AnsycLoad(() => import(
-                    /* webpackChunkName : "views/404" */
-                    "../views/404")
-                )} />
+            <Route exact path="/*" component={AnsycLoad(() => import(/* webpackChunkName : "views/404" */ "../views/404"))} />
         </Switch>
     </Router>
 );
