@@ -7,9 +7,9 @@ const HigherOrderComp = (Child) => {
         refc(instance) {
             console.log(instance)
         }
-        getState(){
-            console.log(this.refs.child.getName())
-            console.log(this.refs.child.state)
+        getState() {
+            this.refs.child.getName && console.log(this.refs.child.getName());
+            console.log(this.refs.child.state);
         }
         render() {
             const { title, ...otherProps } = this.props;
@@ -17,7 +17,7 @@ const HigherOrderComp = (Child) => {
                 <div className="box">
                     <h2>{title}</h2>
                     <div className="wrapComp">
-                        <Child {...otherProps} ref='child'/>
+                        <Child {...otherProps} ref='child' />
                     </div>
                     <button onClick={this.getState.bind(this)}>get wrapComp.state</button>
                     <footer>footer</footer>
@@ -36,7 +36,7 @@ class ContentA extends PureComponent {
     getName() {
         return 'this is component A';
     }
-    increase(){
+    increase() {
         this.setState({
             count: this.state.count + 1
         })
@@ -76,10 +76,14 @@ class HOC extends Component {
             <div>
                 <A title='box-a' list={[1, 2, 3]} />
                 <B title='box-b' style={{ color: "#d23f21" }} />
+                <FormApp/>
             </div>
         )
     }
 }
+
+
+
 
 export default HOC;
 
