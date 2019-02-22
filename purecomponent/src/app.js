@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-ro
 
 
 import Home from './pages/Home';
+import HOC from './pages/HOC';
 import ComponentPage from './pages/Component';
 import PureComponentPage from './pages/PureComponent';
 import PageNotFound from './pages/PageNotFound';
@@ -19,6 +20,7 @@ ReactDOM.render(
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/home">home</Link></li>
+          <li><Link to="/HOC">HOC</Link></li>
           <li><Link to="/component">component</Link></li>
           <li><Link to="/PureComponent">PureComponent</Link></li>
         </ul>
@@ -26,6 +28,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/home" component={Home} />
+          <Route path="/hoc" component={HOC} />
           <Route path="/component" component={ComponentPage} />
           <Route path="/PureComponent" component={PureComponentPage} />
           <Route path="/pageNotFond" component={PageNotFound} />

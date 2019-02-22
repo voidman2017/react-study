@@ -14,28 +14,40 @@ export class FormItem extends Component {
             pass: true
         }
         this.form_id = form_id++;
+        this.pass = true;
     }
-    verifystrlength(value) {
+    verifystrlength() {
+        const { value } = this.state;
         return value.length > 6;
     }
+    // 输入处理
     changeHandle = (e) => {
+        // 输入响应
         const { value } = e.target;
         this.setState({
             value
         });
-        if (this.required && !this.validator(value)) {
+        // 输入校验
+        this.checkPass();
+    }
+    // 校验响应
+    checkPass() {
+        if (this.required && !this.validator()) {
+            this.pass = false;
             this.setState({
                 pass: false
             })
         } else {
+            this.pass = true
             this.setState({
                 pass: true
             })
         }
     }
-    blurHandle(){
+    // 失焦响应
+    blurHandle() {
         const { pass } = this.state;
-        console.log(pass)
+        this.checkPass();
     }
     render() {
         const { value, pass } = this.state;
@@ -45,11 +57,11 @@ export class FormItem extends Component {
             <div>
                 <label htmlFor={`form-${this.form_id}`} {...labelAttr}>{labelName}</label>
                 <input  {...input}
-                    value={value} 
-                    id={`form-${this.form_id}`} 
-                    onChange={this.changeHandle.bind(this)} 
+                    value={value}
+                    id={`form-${this.form_id}`}
+                    onChange={this.changeHandle.bind(this)}
                     onBlur={this.blurHandle.bind(this)}
-                     />
+                />
                 {!pass && <p>{message}</p>}
             </div>
         );
@@ -57,20 +69,30 @@ export class FormItem extends Component {
 }
 
 
-export class FormList extends Component{
-    constructor(props){
+export class FormList extends Component {
+    constructor(props) {
         super(props)
         this.state = {
             pass: true
         }
     }
-    render(){
+    submit() {
+        const { refs } = this;
+        Object.keys(refs).forEach((item) => {
+            refs[item].checkPass()
+        })
+        const res = Object.keys(refs).every((item) => {
+            return refs[item].pass === true
+        })
+    }
+    render() {
         const { list = [] } = this.props;
-        return(
+        return (
             <form action="">
                 {
-                    list.map((item, index) => <FormItem {...item} key={index} /> )
+                    list.map((item, index) => <FormItem {...item} key={index} ref={index} />)
                 }
+                <div onClick={this.submit.bind(this)}>submit</div>
             </form>
         )
     }

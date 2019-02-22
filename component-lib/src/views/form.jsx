@@ -7,14 +7,14 @@ class Form extends Component {
         this.formList = [{
             label:{ name: 'username', className: "label" },
             input:{ placeholder: 'please input username', type: 'text', className: 'input' },
-            initValue:'princed',
+            initValue:'prince',
             message:'用户名长度大于6个字符',
             validatorType:'strlength'
         },{
             label:{ name: 'password', className: "label" },
             input:{ placeholder: 'please input password', type: 'password', className: 'input' },
-            message: '密码长度不大于10个字符',
-            customValidator: checkpassword
+            message: '密码长度大于4位小于14位',
+            // customValidator: checkpassword
         }];
     }
     render() {
@@ -39,8 +39,9 @@ class Form extends Component {
     }
 }
 
-function checkpassword(value) {
-    return value.length < 10;
+function checkpassword() {
+    const { value } = this.state;
+    return value.length < 14 && value.length >=4;
 }
 
 export default Form;

@@ -51,6 +51,6 @@ module.exports = {
     devServer: {
         inline: true,
         port: 3000,
-        // host:'10.200.4.230'
+        host:'127.0.0.1'
     }
 };
