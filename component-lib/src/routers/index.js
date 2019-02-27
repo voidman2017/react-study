@@ -14,7 +14,7 @@ class AppLoadRoute extends PureComponent {
             this.setState({
                 loaded: true
             })
-        }, 1000)
+        }, 300)
     }
     render() {
         const { loaded } = this.state;
