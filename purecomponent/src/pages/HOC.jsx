@@ -4,6 +4,12 @@ import '../css/hoc.css';
 
 const HigherOrderComp = (Child) => {
     return class Container extends PureComponent {
+        constructor(props) {
+            super(props);
+            this.state = {
+                value: ''
+            }
+        }
         refc(instance) {
             console.log(instance)
         }
@@ -11,13 +17,22 @@ const HigherOrderComp = (Child) => {
             this.refs.child.getName && console.log(this.refs.child.getName());
             console.log(this.refs.child.state);
         }
+        changeHandle(e) {
+            this.setState({
+                value: e.target.value
+            })
+        }
         render() {
             const { title, ...otherProps } = this.props;
+            const newProps = {
+                value: this.state.value,
+                onChange: this.changeHandle.bind(this)
+            }
             return (
                 <div className="box">
                     <h2>{title}</h2>
                     <div className="wrapComp">
-                        <Child {...otherProps} ref='child' />
+                        <Child ref='child' {...otherProps} {...newProps} />
                     </div>
                     <button onClick={this.getState.bind(this)}>get wrapComp.state</button>
                     <footer>footer</footer>
@@ -26,6 +41,7 @@ const HigherOrderComp = (Child) => {
         }
     }
 }
+
 class ContentA extends PureComponent {
     constructor(props) {
         super(props);
@@ -61,6 +77,7 @@ class ContentB extends PureComponent {
     render() {
         return (
             <div style={this.props.style}>
+                <input type="text" {...this.props} />
                 this is b,get props color
             </div>
         )
@@ -76,13 +93,10 @@ class HOC extends Component {
             <div>
                 <A title='box-a' list={[1, 2, 3]} />
                 <B title='box-b' style={{ color: "#d23f21" }} />
-                <FormApp/>
             </div>
         )
     }
 }
-
-
 
 
 export default HOC;
