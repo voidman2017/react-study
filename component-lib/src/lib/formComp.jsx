@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isTypeOf } from '../../tool/common';
+import { isTypeOf } from '../tool/common';
 import '@css/formComp';
 
 let form_id = 1;

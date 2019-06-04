@@ -1,5 +1,37 @@
 import React, { PureComponent } from 'react';
 import { Route } from 'react-router-dom';
+import Loadable from "react-loadable";
+import { connectRedux } from "../reducers/tool";
+
+/**
+ * === 初始化获取应用基础信息 === 
+ */
+export const AppLoadRoute = connectRedux(['user.isLogined'])(
+    class AppLoadRoute extends PureComponent {
+        constructor(props) {
+            super(props)
+            this.state = {
+                loaded: false
+            }
+        }
+        getLoginStatu() {
+            console.log(window.localStorage)
+            const { isLogined=false } = window.localStorage;
+            setTimeout(() => {
+                this.props.mapDispatchToStore("user", "profile", { data: isLogined })
+                this.setState({ loaded: true });
+            }, 300)
+        }
+        componentDidMount() {
+            this.getLoginStatu();
+        }
+        render() {
+            const { loaded } = this.state;
+            return loaded ? this.props.children : '加载中...';
+        }
+    }
+)
+
 
 /**
  * === 拦截组件 ===
@@ -7,7 +39,7 @@ import { Route } from 'react-router-dom';
  * @param {*} opts 
  */
 export const InterceptRoute = (opts) => {
-    const { component: Component, ...rest } = opts; 
+    const { component: Component, ...rest } = opts;
     class InterceptComponent extends PureComponent {
         constructor(props) {
             super(props)
@@ -30,5 +62,32 @@ export const InterceptRoute = (opts) => {
                 pass ? <Component {...this.props} /> : '条件不满足'
         }
     }
-    return <Route {...rest} component={ InterceptComponent } />
+    return <Route {...rest} component={InterceptComponent} />
+}
+
+
+
+/**
+ * === 拦截组件 ===
+ * 
+ * @param {*} opts 
+ */
+export const NeedLoginRoute = (opts) => {
+    const { component: Component, ...rest } = opts;
+    const Container = connectRedux(['user.isLogined'])(
+        class NeedLoginRoute extends PureComponent {
+            constructor(props) {
+                super(props)
+            }
+            redirectLogin() {
+                const loginUrl = '/user/login';
+                location.replace(loginUrl);
+            }
+            render() {
+                return this.props.isLogined ?
+                    <Component {...this.props} /> : this.redirectLogin();
+            }
+        }
+    )
+    return <Route {...rest} component={Container} />
 }
