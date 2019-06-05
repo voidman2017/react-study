@@ -1,7 +1,6 @@
 
 import { connect } from "react-redux";
-import {isTypeOf} from '../../tool/common';
-
+import { isTypeOf } from "../../tool/util";
 
 const subscribe = ( data, key, cname ) => {
     let parts = key.split('.'), 
@@ -80,7 +79,7 @@ export const concatActionAndType = function( pageName ){
     }
 }
 
-export const nameConnectReducer = function( pageName, fn, initState = { } ){
+export const nameConnectReducer = function( pageName, fn, initState ){
     return function( state = initState, action ){
         let exp = new RegExp("^"+ pageName +"_", "g");
         if( !exp.test(action.type) ){

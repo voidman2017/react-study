@@ -1,0 +1,39 @@
+.demo-swiper{
+    position: relative;
+    &>.swiper-tab{
+        height: 30px; border-bottom: 2px solid #e5e5e5;
+        &>ul>li.bullet{
+            color: #999; font-size: 14px;
+            &.activity{ background-color: #000; color: #fff; }
+        }
+        .swiper-slide{
+            height: 60px; line-height: 60px; border-left: 1px solid #f1f1f1;
+        }
+    }
+    .second-swiper{
+        &>.swiper-tab{
+            height: 30px; border-bottom: 2px solid #e5e5e5;
+            &>ul>li.bullet{
+                color: #999; font-size: 14px;
+                &.activity{ background-color: #000; color: #fff; }
+            }
+        }
+    }
+}
+
+//swiper 通用样式
+.swiper-tab{
+    &>ul{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        &>li{
+            display: block;
+            -webkit-box-flex: auto;
+            -webkit-flex: auto;
+            -ms-flex: auto;
+            flex: auto
+        }
+    }
+}

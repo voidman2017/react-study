@@ -5,8 +5,23 @@ class home extends Component {
     render() {
         return (
             <div>
-                <Link to="/tab">tab</Link>
-                home
+                <ul>
+                    <li>
+                        <Link to="/tab">tab</Link>
+                    </li>
+                    <li>
+                        <Link to="/user">user</Link>
+                    </li>
+                    <li>
+                        <Link to="/redux">redux</Link>
+                    </li>
+                    <li>
+                        <Link to="/reduxHigh">reduxHigh</Link>
+                    </li>
+                    <li>
+                        <Link to="/loadmore">loadmore</Link>
+                    </li>
+                </ul>
             </div>
         );
     }

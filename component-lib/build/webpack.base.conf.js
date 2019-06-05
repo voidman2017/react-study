@@ -42,7 +42,7 @@ module.exports = {
             '@packages': path.resolve(__dirname, '../packages/'),
             '@js': path.resolve(__dirname, '../src/js/'),
             '@css': path.resolve(__dirname, "../src/assets/css/"),
-            '@lib': path.resolve(__dirname, "../src/assets/lib/"),
+            '@lib': path.resolve(__dirname, "../src/lib/"),
         }
     },
     plugins: [
