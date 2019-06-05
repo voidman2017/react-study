@@ -1,8 +1,14 @@
 
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import store from '../reducers';
 
 
+/* Action */
+let unsubscribe = store.subscribe(()=>{
+    console.log(store.getState())
+})
+unsubscribe();
 class NormalRedux extends PureComponent {
     constructor(props) {
         super(props);
