@@ -15,7 +15,8 @@ export class List extends PureComponent {
         let { children } = this.props;
         return React.Children.map(children, (child) => {
             return React.cloneElement(child, { 
-                request : this.request.bind(this)
+                request : this.request.bind(this),
+                destoryClear : this.destoryClear.bind(this)
             })
         })
     }

@@ -17,33 +17,34 @@ class ScrollList extends PureComponent{
         super(props)
     }
     opts = {
-        api : API.USER.PRODUCT.PLAN,
+        api : API.USER.PRODUCT.LIST,
         params : { pageIndex : "1", pageSize : "3" },  //(可选)默认值无
         elemt : "test",
         pSize : "pageSize",     //(可选)默认值 pageSize
         pIndex : "pageIndex",   //(可选)默认值 pageIndex
         str : "data.list",
-        namespace : "product.plan",
+        namespace : "product.list",
     }
     render(){
         return (
             <div id="test" style={{ height:"670px", overflow : "scroll" }}>
                 <ConnectScroll { ...this.opts } >
-                    <PlanList />
+                    <ProductList />
                 </ConnectScroll>
             </div>
         )
     }
 }
 
-const PlanList = connectRedux([
-    "product.plan.data:list"
+const ProductList = connectRedux([
+    "product.list.data:list"
 ])(
     class Container extends PureComponent{
         constructor(props){
             super(props)
         }
         screen(){
+            this.props.destoryClear();
             this.props.request({ pageSize : 10, pageIndex : 1 })
         }
         render(){

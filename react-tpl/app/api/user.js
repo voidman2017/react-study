@@ -6,8 +6,8 @@ module.exports = {
         }
     },
     "PRODUCT" : {
-        "PLAN" : {
-            "url" : "/proxy/trc_bjcg/plan/list",
+        "LIST" : {
+            "url" : "https://easy-mock.com/mock/5c1670f94bc5e34fe40b2a7e/example/products/list",
             "type" : "get"
         }
     }
