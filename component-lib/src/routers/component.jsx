@@ -16,9 +16,9 @@ export const AppLoadRoute = connectRedux(['user.isLogined'])(
         }
         getLoginStatu() {
             console.log(window.localStorage)
-            const { isLogined=false } = window.localStorage;
+            const { isLogined = false, name } = window.localStorage;
             setTimeout(() => {
-                this.props.mapDispatchToStore("user", "profile", { data: isLogined })
+                this.props.mapDispatchToStore("user", "profile", { data: { isLogined, name } })
                 this.setState({ loaded: true });
             }, 300)
         }

@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connectRedux } from "../../reducers/tool";
 
-function mapStateToProps(state) {
-    return {
 
-    };
-}
-
-class setting extends Component {
-    render() {
-        return (
-            <div>
-                用户设置界面，需要登录
-            </div>
-        );
+const setting = connectRedux(['user'])(
+    class setting extends Component {
+        render() {
+            const {name} = this.props;
+            return (
+                <div>
+                    welcome {name} !
+                </div>
+            );
+        }
     }
-}
+)
+export default setting;
 
-export default connect(
-    mapStateToProps,
-)(setting);
+

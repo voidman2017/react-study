@@ -1,14 +1,14 @@
 import createReducers from './tool/createReducers.js';
 
 let initState = {
-   isLogined: false
+    isLogined: false,
 };
-
 
 function action(state = initState, action) {
     switch (action.type) {
         case "profile":
-            return { ...state, isLogined: action.data };
+            const { isLogined, name } = action.data;
+            return { ...state, isLogined, name };
     }
 }
 

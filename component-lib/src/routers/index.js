@@ -44,6 +44,7 @@ const RootRoute = () => (
             <Route exact path="/reduxHigh" component={AnsycLoad(() => import(/* webpackChunkName : "views/reduxHigh" */ "../views/reduxHigh"))} />
             <Route exact path="/tab" component={AnsycLoad(() => import(/* webpackChunkName : "views/tab" */ "../views/tab"))} />
             <Route exact path="/form" component={AnsycLoad(() => import(/* webpackChunkName : "views/form" */ "../views/form"))} />
+            <Route exact path="/loadmore" component={AnsycLoad(() => import(/* webpackChunkName : "views/loadmore" */ "../views/loadmore"))} />
             <Route exact path="/" render={(props) => <Redirect to={{ pathname: "/index", state: { from: props.location } }} />} />
             <Route exact path="/*" component={AnsycLoad(() => import(/* webpackChunkName : "views/404" */ "../views/404"))} />
         </Switch>

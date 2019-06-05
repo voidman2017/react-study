@@ -1,31 +1,7 @@
 
 import { connect } from "react-redux";
+import {isTypeOf} from '../../tool/common';
 
-const isTypeOf = ( val ) => {
-    const type = toString.call(val);
-    switch(type){
-        case "[object Error]": 
-            return "error";
-        case "[object Array]": 
-            return "array";
-        case "[object RegExp]": 
-            return "regExp";
-        case "[object Number]": 
-            return "number";
-        case "[object Object]": 
-            return "object";
-        case "[object String]": 
-            return "string";
-        case "[object Boolean]": 
-            return "boolean";
-        case "[object Function]": 
-            return "function";
-        case "[object Undefined]": 
-            return "undefined";
-        default : 
-            return "null";
-    }
-};
 
 const subscribe = ( data, key, cname ) => {
     let parts = key.split('.'), 
