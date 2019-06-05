@@ -29,7 +29,7 @@ module.exports = merge(common, {
             errors : true,
             errorDetails : true,
         },
-        port : 3233,
+        port : 3122,
         host : '127.0.0.1',
         hot : true
     },
