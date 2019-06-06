@@ -11,5 +11,4 @@ function action(state = initState, action) {
             return { ...state, isLogined, name };
     }
 }
-
 export default createReducers("user", action, initState);

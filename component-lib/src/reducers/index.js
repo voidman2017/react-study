@@ -1,15 +1,16 @@
 import { combineReducers } from 'redux';
 import { createStore } from 'redux';
-import todo from './todo';
 import list from "./list";
 import user from "./user";
 import product from './product';
+import data from './data';
+
 
 const rootReducer = combineReducers({
-    todo,
     list,
     user,
     product,
+    data,
 })
 
 
