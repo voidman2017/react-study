@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Route } from 'react-router-dom';
-import Loadable from "react-loadable";
 import { connectRedux } from "../reducers/tool";
 
 /**
@@ -15,7 +14,6 @@ export const AppLoadRoute = connectRedux(['user.isLogined'])(
             }
         }
         getLoginStatu() {
-            console.log(window.localStorage)
             const { isLogined = false, name } = window.localStorage;
             setTimeout(() => {
                 this.props.mapDispatchToStore("user", "profile", { data: { isLogined, name } })

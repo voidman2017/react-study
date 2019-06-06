@@ -39,6 +39,7 @@ const RootRoute = () => (
         <Switch>
             <InterceptRoute exact path="/index" component={AnsycLoad(() => import( /* webpackChunkName : "views/home" */ "../views/home"))} />
             <Route path="/user" component={UserRoute} />
+            <Route exact path="/eventBubble" component={AnsycLoad(() => import(/* webpackChunkName : "views/eventBubble" */ "../views/eventBubble"))} />
             <Route exact path="/redux" component={AnsycLoad(() => import(/* webpackChunkName : "views/redux" */ "../views/redux"))} />
             <Route exact path="/reduxHigh" component={AnsycLoad(() => import(/* webpackChunkName : "views/reduxHigh" */ "../views/reduxHigh"))} />
             <Route exact path="/tab" component={AnsycLoad(() => import(/* webpackChunkName : "views/tab" */ "../views/tab"))} />
