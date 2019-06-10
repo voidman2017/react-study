@@ -19,6 +19,9 @@ class home extends Component {
                         <Link to="/reduxHigh">reduxHigh</Link>
                     </li>
                     <li>
+                        <Link to="/reduxWithoutConnect">reduxWithoutConnect</Link>
+                    </li>
+                    <li>
                         <Link to="/loadmore">loadmore</Link>
                     </li>
                 </ul>

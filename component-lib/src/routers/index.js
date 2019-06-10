@@ -43,6 +43,7 @@ const RootRoute = () => (
             <Route exact path="/eventBubble" component={AnsycLoad(() => import(/* webpackChunkName : "views/eventBubble" */ "../views/eventBubble"))} />
             <Route exact path="/redux" component={AnsycLoad(() => import(/* webpackChunkName : "views/redux" */ "../views/redux"))} />
             <Route exact path="/reduxHigh" component={AnsycLoad(() => import(/* webpackChunkName : "views/reduxHigh" */ "../views/reduxHigh"))} />
+            <Route exact path="/reduxWithoutConnect" component={AnsycLoad(() => import(/* webpackChunkName : "views/reduxWithoutConnect" */ "../views/reduxWithoutConnect"))} />
             <Route exact path="/tab" component={AnsycLoad(() => import(/* webpackChunkName : "views/tab" */ "../views/tab"))} />
             <Route exact path="/form" component={AnsycLoad(() => import(/* webpackChunkName : "views/form" */ "../views/form"))} />
             <Route exact path="/loadmore" component={AnsycLoad(() => import(/* webpackChunkName : "views/loadmore" */ "../views/loadmore"))} />
