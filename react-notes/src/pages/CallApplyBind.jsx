@@ -19,30 +19,48 @@ class Parent extends Component {
             list: [1, 2, 3]
         }
     }
-    add() {
-
+    add(params) {
+        alert(params)
+        console.log(this)
+        const { list } = this.state;
+        this.setState({
+            list: [...list, list.length + 1]
+        })
     }
     render() {
         const { list } = this.state;
         return (
-            <List list={list} />
+            <div>
+                <List list={list} add={this.add.bind(this)} />
+                <List list={list} add={() => this.add() } />
+                <List list={list} add={this.add} />
+            </div>
         )
     }
 }
 
 class List extends Component {
     render() {
-        const { list } = this.props;
+        const { list = [], add } = this.props;
+        console.log(add)
         return (
-            <ul>
-                {list.map((item,index) => <li key={index}>{item}</li>)}
-            </ul>
+            <div>
+                <ul>
+                    {list.map((item, index) => <li key={index}>{item}</li>)}
+                </ul>
+                <button onClick={()=>add(123)}>add</button>
+                <Child add={add}/>
+            </div>
         )
     }
 }
 
 
-
+class Child extends Component{
+    render(){
+        return <button onClick={()=>this.props.add(123)}>click</button>
+    }
+}
 export default CallApplyBind;
 
 

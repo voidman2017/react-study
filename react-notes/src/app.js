@@ -9,6 +9,7 @@ import HOC from './pages/HOC';
 import ComponentPage from './pages/Component';
 import PureComponentPage from './pages/PureComponent';
 import PageNotFound from './pages/PageNotFound';
+import CallApplyBind from './pages/CallApplyBind';
 
 // 引入公共样式
 import './css/common.css';
@@ -23,6 +24,7 @@ ReactDOM.render(
           <li><Link to="/HOC">HOC</Link></li>
           <li><Link to="/component">component</Link></li>
           <li><Link to="/PureComponent">PureComponent</Link></li>
+          <li><Link to="/CallApplyBind">CallApplyBind</Link></li>
         </ul>
         <hr />
         <Switch>
@@ -31,6 +33,7 @@ ReactDOM.render(
           <Route path="/hoc" component={HOC} />
           <Route path="/component" component={ComponentPage} />
           <Route path="/PureComponent" component={PureComponentPage} />
+          <Route path="/CallApplyBind" component={CallApplyBind} />
           <Route path="/pageNotFond" component={PageNotFound} />
           <Redirect to="/pageNotFond" />
         </Switch>
