@@ -10,35 +10,38 @@ import ComponentPage from './pages/Component';
 import PureComponentPage from './pages/PureComponent';
 import PageNotFound from './pages/PageNotFound';
 import CallApplyBind from './pages/CallApplyBind';
+import SetState from './pages/setState';
 
 // 引入公共样式
 import './css/common.css';
 
 
 ReactDOM.render(
-    <Router>
-      <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/home">home</Link></li>
-          <li><Link to="/HOC">HOC</Link></li>
-          <li><Link to="/component">component</Link></li>
-          <li><Link to="/PureComponent">PureComponent</Link></li>
-          <li><Link to="/CallApplyBind">CallApplyBind</Link></li>
-        </ul>
-        <hr />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/home" component={Home} />
-          <Route path="/hoc" component={HOC} />
-          <Route path="/component" component={ComponentPage} />
-          <Route path="/PureComponent" component={PureComponentPage} />
-          <Route path="/CallApplyBind" component={CallApplyBind} />
-          <Route path="/pageNotFond" component={PageNotFound} />
-          <Redirect to="/pageNotFond" />
-        </Switch>
-      </div>
-    </Router>
+  <Router>
+    <div>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/home">home</Link></li>
+        <li><Link to="/HOC">HOC</Link></li>
+        <li><Link to="/component">component</Link></li>
+        <li><Link to="/PureComponent">PureComponent</Link></li>
+        <li><Link to="/CallApplyBind">CallApplyBind</Link></li>
+        <li><Link to="/SetState">SetState</Link></li>
+      </ul>
+      <hr />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/home" component={Home} />
+        <Route path="/hoc" component={HOC} />
+        <Route path="/component" component={ComponentPage} />
+        <Route path="/PureComponent" component={PureComponentPage} />
+        <Route path="/CallApplyBind" component={CallApplyBind} />
+        <Route path="/SetState" component={SetState} />
+        <Route path="/pageNotFond" component={PageNotFound} />
+        <Redirect to="/pageNotFond" />
+      </Switch>
+    </div>
+  </Router>
   ,
   document.getElementById('app')
 );
