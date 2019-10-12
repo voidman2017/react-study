@@ -57,7 +57,6 @@ class ChildDemo extends Component {
                 <button onClick={this.props.add.bind(this)}>add2</button>
                 <button onClick={()=>this.props.add()}>add3</button>
             </div>
-            /*  */
         )
     }
 }
