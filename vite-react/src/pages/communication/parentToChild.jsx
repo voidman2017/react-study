@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "antd";
-const Communication = () => {
+const ParentToChild = () => {
   const [flag, setFlag] = useState(true);
 
   return (
@@ -25,4 +25,4 @@ const Child = (props) => {
   );
 };
 
-export default Communication;
+export default ParentToChild;

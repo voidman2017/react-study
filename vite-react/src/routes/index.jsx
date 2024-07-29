@@ -5,18 +5,42 @@ import routes from "./routesConfig";
 
 const { Sider, Content } = Layout;
 
+const findMatchingRouteKeys = (routes, pathname, parentPath = "") => {
+  let keys = [];
+
+  for (let route of routes) {
+    const fullPath = parentPath + route.path;
+    if (fullPath === pathname) {
+      keys.push(route.key);
+    } else if (pathname.startsWith(fullPath)) {
+      keys.push(route.key);
+      if (Array.isArray(route.children)) {
+        const childKeys = findMatchingRouteKeys(
+          route.children,
+          pathname,
+          fullPath
+        );
+        if (childKeys.length > 0) {
+          keys = keys.concat(childKeys);
+        }
+      }
+    }
+  }
+
+  return keys;
+};
+
 const generateRoutes = (routes, parentPath = "") => {
   return routes.map((route) => {
     if (route.children) {
       return (
-        <>
-          <Route
-            key={route.key}
-            path={parentPath + route.path}
-            element={<route.component />}
-          />
+        <Route
+          key={route.key}
+          path={parentPath + route.path}
+          element={<route.component />}
+        >
           {generateRoutes(route.children, parentPath + route.path)}
-        </>
+        </Route>
       );
     }
     return (
@@ -59,11 +83,18 @@ const generateMenuItems = (routes, parentPath = "") => {
 };
 
 const AppRoutes = () => {
+  const path = location.pathname;
+  const key = findMatchingRouteKeys(routes, path);
   return (
     <Router>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={key}
+            defaultOpenKeys={key}
+          >
             {generateMenuItems(routes)}
           </Menu>
         </Sider>
