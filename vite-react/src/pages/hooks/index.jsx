@@ -1,8 +1,16 @@
 import { Card } from "antd";
+import UseState from "./useState";
+import UseEffect from "./useEffect";
 const Hooks = () => {
   return (
     <>
-      <Card title="mixin"></Card>
+      <Card title="useState">
+        <UseState />
+      </Card>
+
+      <Card title="useEffect">
+        <UseEffect />
+      </Card>
     </>
   );
 };
