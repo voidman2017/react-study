@@ -1,23 +1,44 @@
 import { useState, useEffect } from "react";
 import { Button } from "antd";
 
-const Child = () => {
+const WithoutDepsComponent = () => {
   const [count, setCount] = useState(0);
 
   const clickHanlder = () => {
     setCount(count + 1);
   };
   useEffect(() => {
-    console.log("挂载");
-
+    console.log("WithoutDepsComponent 副作用方法执行");
     return () => {
-      console.log("卸载");
+      console.log("WithoutDepsComponent 清理方法执行");
+    };
+  });
+
+  return (
+    <>
+      <h2>WithoutDepsComponent component</h2>
+      <p>count: {count}</p>
+      <Button onClick={() => clickHanlder()}>add</Button>
+    </>
+  );
+};
+
+const WithDepsComponent = () => {
+  const [count, setCount] = useState(0);
+
+  const clickHanlder = () => {
+    setCount(count + 1);
+  };
+  useEffect(() => {
+    console.log("WithDepsComponent 副作用方法执行");
+    return () => {
+      console.log("WithDepsComponent 清理方法执行");
     };
   }, [count]);
 
   return (
     <>
-      <h2>child component</h2>
+      <h2>WithDepsComponent component</h2>
       <p>count: {count}</p>
       <Button onClick={() => clickHanlder()}>add</Button>
     </>
@@ -38,9 +59,9 @@ const WithoutInitialRender = () => {
     } else {
       setIsMounted(true);
     }
-    return ()=>{
-      console.log("WithoutInitialRender 销毁")
-    }
+    return () => {
+      console.log("WithoutInitialRender 清理方法执行");
+    };
   }, [count]); // 在 count 变化时执行
 
   return (
@@ -54,28 +75,19 @@ const WithoutInitialRender = () => {
 
 const WithoutDestroyed = () => {
   const [count, setCount] = useState(0);
-  const [skipCleanup, setSkipCleanup] = useState(true);
-
   const clickHandler = () => {
     setCount(count + 1);
   };
 
   useEffect(() => {
-    console.log("WithoutDestroyed 挂载");
-
-    return () => {
-      if (!skipCleanup) {
-        console.log("WithoutDestroyed 卸载");
-      }
-    };
-  }, [skipCleanup]);
+    console.log("WithoutDestroyed 副作用方法执行");
+  }, []);
 
   return (
     <>
       <h2>WithoutDestroyed component</h2>
       <p>count: {count}</p>
       <Button onClick={clickHandler}>add</Button>
-      <Button onClick={() => setSkipCleanup(true)}>Skip Cleanup</Button>
     </>
   );
 };
@@ -91,9 +103,10 @@ const UseEffect = () => {
           setFlag((v) => !v);
         }}
       >
-        {flag ? "卸载" : "挂载"}
+        {flag ? "销毁" : "挂载"}
       </Button>
-      {flag && <Child />}
+      {flag && <WithoutDepsComponent />}
+      {flag && <WithDepsComponent />}
       {flag && <WithoutInitialRender />}
       {flag && <WithoutDestroyed />}
     </>

@@ -98,9 +98,18 @@ const AppRoutes = () => {
             {generateMenuItems(routes)}
           </Menu>
         </Sider>
-        <Layout>
+        <Layout
+          style={{
+            flex: 1,
+            maxHeight: "100vh",
+            overflow: "scroll",
+          }}
+        >
           <Content
-            style={{ margin: "24px 16px", padding: 24, background: "#fff" }}
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+            }}
           >
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>{generateRoutes(routes)}</Routes>
