@@ -2,11 +2,29 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import routes from "./routesConfig";
+import type { MenuProps } from 'antd';
+
+// 直接使用 MenuProps 的类型定义
+type MenuItem = Required<MenuProps>['items'][number];
 
 const { Sider, Content } = Layout;
 
-const findMatchingRouteKeys = (routes, pathname, parentPath = "") => {
-  let keys = [];
+interface RouteItem {
+  path: string;
+  component: React.ComponentType;
+  name: string;
+  key: string;
+  children?: RouteItem[];
+}
+
+
+
+const findMatchingRouteKeys = (
+  routes: RouteItem[],
+  pathname: string,
+  parentPath: string = ""
+): string[] => {
+  let keys: string[] = [];
 
   for (let route of routes) {
     const fullPath = parentPath + route.path;
@@ -21,7 +39,7 @@ const findMatchingRouteKeys = (routes, pathname, parentPath = "") => {
           fullPath
         );
         if (childKeys.length > 0) {
-          keys = keys.concat(childKeys);
+          keys = [...keys, ...childKeys];
         }
       }
     }
@@ -30,7 +48,10 @@ const findMatchingRouteKeys = (routes, pathname, parentPath = "") => {
   return keys;
 };
 
-const generateRoutes = (routes, parentPath = "") => {
+const generateRoutes = (
+  routes: RouteItem[],
+  parentPath: string = ""
+): React.ReactNode[] => {
   return routes.map((route) => {
     if (route.children) {
       return (
@@ -53,13 +74,16 @@ const generateRoutes = (routes, parentPath = "") => {
   });
 };
 
-const generateMenuItems = (routes, parentPath = "") => {
-  return routes.map((route) => {
+const generateMenuItems = (
+  routes: RouteItem[],
+  parentPath: string = ""
+): MenuProps['items'] => {
+  return routes.map((route): MenuItem => {
     if (route.children) {
       return {
         key: route.key,
         label: (
-          <Link to={parentPath + route.path} onClick={(e) => e.stopPropagation()}>
+          <Link to={parentPath + route.path}>
             {route.name}
           </Link>
         ),
