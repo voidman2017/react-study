@@ -56,29 +56,20 @@ const generateRoutes = (routes, parentPath = "") => {
 const generateMenuItems = (routes, parentPath = "") => {
   return routes.map((route) => {
     if (route.children) {
-      return (
-        <Menu.SubMenu
-          key={route.key}
-          title={
-            <span>
-              <Link
-                to={parentPath + route.path}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {route.name}
-              </Link>
-            </span>
-          }
-        >
-          {generateMenuItems(route.children, parentPath + route.path)}
-        </Menu.SubMenu>
-      );
+      return {
+        key: route.key,
+        label: (
+          <Link to={parentPath + route.path} onClick={(e) => e.stopPropagation()}>
+            {route.name}
+          </Link>
+        ),
+        children: generateMenuItems(route.children, parentPath + route.path)
+      };
     }
-    return (
-      <Menu.Item key={route.key}>
-        <Link to={parentPath + route.path}>{route.name}</Link>
-      </Menu.Item>
-    );
+    return {
+      key: route.key,
+      label: <Link to={parentPath + route.path}>{route.name}</Link>
+    };
   });
 };
 
@@ -94,8 +85,8 @@ const AppRoutes = () => {
             mode="inline"
             defaultSelectedKeys={key}
             defaultOpenKeys={key}
+            items={generateMenuItems(routes)}
           >
-            {generateMenuItems(routes)}
           </Menu>
         </Sider>
         <Layout

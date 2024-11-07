@@ -5,7 +5,10 @@ const Home = lazy(() => import("../pages/home"));
 const Communication = lazy(() => import("../pages/communication"));
 const IntensifyComponent = lazy(() => import("../pages/intensifyComponent"));
 const Hooks = lazy(() => import("../pages/hooks"));
-
+const Notes = lazy(() => import("../pages/notes"));
+const Props = lazy(() => import("../pages/notes/props"));
+const This = lazy(() => import("../pages/notes/this"));
+const Image = lazy(() => import("../pages/notes/image"));
 const routes = [
   // {
   //   path: "/home",
@@ -29,12 +32,12 @@ const routes = [
   //     },
   //   ],
   // },
-  {
-    path: "/communication",
-    component: Communication,
-    name: "组件通信",
-    key: "2",
-  },
+  // {
+  //   path: "/communication",
+  //   component: Communication,
+  //   name: "组件通信",
+  //   key: "2",
+  // },
   {
     path: "/intensifyComponent",
     component: IntensifyComponent,
@@ -46,6 +49,32 @@ const routes = [
     component: Hooks,
     name: "Hooks",
     key: "4",
+  },
+  {
+    path: "/notes",
+    component: Notes,
+    name: "Notes",
+    key: "5",
+    children: [
+      {
+        path: "/props",
+        component: Props,
+        name: "Props",
+        key: "5-1",
+      },
+      {
+        path: "/this",
+        component: This,
+        name: "This",
+        key: "5-2",
+      },
+      {
+        path: "/image",
+        component: Image,
+        name: "Image",
+        key: "5-3",
+      },
+    ],
   },
 ];
 

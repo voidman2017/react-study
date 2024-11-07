@@ -7,4 +7,7 @@ export default defineConfig({
   server: {
     port: 4455,
   },
+  build: {
+    assetsInlineLimit: 100 * 1024, // 指定大小尺寸以下的图片会被转换为base64
+  },
 });
